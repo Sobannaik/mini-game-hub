@@ -1,0 +1,116 @@
+/* ============================================================
+   Button — 90s Retro Bevel Style
+   ============================================================ */
+
+.btn {
+  display: inline-flex;
+  align-items: center;
+  justify-content: center;
+  gap: var(--space-2);
+  font-family: var(--font-pixel);
+  font-weight: 400;
+  letter-spacing: 0.06em;
+  text-transform: uppercase;
+  white-space: nowrap;
+  cursor: pointer;
+  text-decoration: none;
+  border: none;
+  position: relative;
+  image-rendering: pixelated;
+}
+
+.btn:focus-visible {
+  outline: 2px solid var(--color-accent);
+  outline-offset: 2px;
+}
+
+.btn:active:not(:disabled) {
+  transform: translate(2px, 2px);
+}
+
+/* --- Sizes --- */
+.btn--sm {
+  padding: 0.4rem 0.8rem;
+  font-size: 0.5rem;
+}
+
+.btn--md {
+  padding: 0.5rem 1rem;
+  font-size: 0.6rem;
+}
+
+.btn--lg {
+  padding: 0.65rem 1.25rem;
+  font-size: 0.65rem;
+}
+
+/* --- Classic 90s Bevel Button (Primary) --- */
+.btn--primary {
+  background: var(--color-accent);
+  color: #000;
+  /* Outset bevel: light top-left, dark bottom-right */
+  box-shadow:
+    inset 2px 2px 0 rgba(255, 255, 255, 0.7),
+    inset -2px -2px 0 rgba(0, 0, 0, 0.6),
+    3px 3px 0 #000;
+}
+
+.btn--primary:hover:not(:disabled) {
+  background: var(--color-accent-hover);
+  text-shadow: none;
+  box-shadow:
+    inset 2px 2px 0 rgba(255, 255, 255, 0.6),
+    inset -2px -2px 0 rgba(0, 0, 0, 0.5),
+    3px 3px 0 #000,
+    0 0 12px rgba(0, 245, 255, 0.4);
+}
+
+.btn--primary:active:not(:disabled) {
+  /* Pressed inset bevel */
+  box-shadow:
+    inset -2px -2px 0 rgba(255, 255, 255, 0.4),
+    inset 2px 2px 0 rgba(0, 0, 0, 0.5),
+    1px 1px 0 #000;
+}
+
+/* --- Ghost --- */
+.btn--ghost {
+  background: transparent;
+  color: var(--color-text-muted);
+  box-shadow: none;
+  border: 2px solid transparent;
+}
+
+.btn--ghost:hover:not(:disabled) {
+  color: var(--color-neon-yellow);
+  border-color: var(--color-neon-yellow);
+  text-shadow: var(--glow-yellow);
+  box-shadow: 2px 2px 0 #000;
+}
+
+/* --- Outline --- */
+.btn--outline {
+  background: transparent;
+  color: var(--color-accent);
+  border: 2px solid var(--color-accent);
+  box-shadow: 2px 2px 0 #000;
+  text-shadow: 0 0 6px rgba(0, 245, 255, 0.4);
+}
+
+.btn--outline:hover:not(:disabled) {
+  background: rgba(0, 245, 255, 0.1);
+  text-shadow: var(--glow-cyan);
+  box-shadow: 2px 2px 0 #000, 0 0 10px rgba(0, 245, 255, 0.3);
+}
+
+.btn--outline:active:not(:disabled) {
+  box-shadow: 1px 1px 0 #000;
+  transform: translate(1px, 1px);
+}
+
+/* --- Disabled --- */
+.btn:disabled {
+  opacity: 0.35;
+  cursor: not-allowed;
+  filter: grayscale(0.5);
+}

@@ -1,0 +1,202 @@
+/* ============================================================
+   About Page — 90s Retro Arcade
+   ============================================================ */
+
+.about-page {
+  padding: var(--space-12) 0 var(--space-20);
+}
+
+/* ---------- Header ---------- */
+.about-page__header {
+  max-width: 640px;
+  margin-bottom: var(--space-10);
+  display: flex;
+  flex-direction: column;
+  gap: var(--space-4);
+}
+
+.about-page__title {
+  font-family: var(--font-pixel);
+  font-size: clamp(0.8rem, 2.5vw, 1.5rem);
+  font-weight: 400;
+  color: var(--color-neon-pink);
+  text-shadow: var(--glow-pink);
+  text-transform: uppercase;
+  letter-spacing: 0.06em;
+}
+
+.about-page__lead {
+  font-family: var(--font-vt);
+  font-size: 1.2rem;
+  color: var(--color-text-muted);
+  line-height: 1.6;
+}
+
+/* ---------- Content sections ---------- */
+.about-page__content {
+  display: flex;
+  flex-direction: column;
+  gap: var(--space-4);
+  margin-bottom: var(--space-10);
+}
+
+/* ---------- Info Card ---------- */
+.about-card {
+  display: flex;
+  gap: var(--space-4);
+  padding: var(--space-5);
+  background: var(--color-surface);
+  border: 2px solid var(--color-border);
+  box-shadow: 4px 4px 0 #000;
+  transition: transform 80ms, box-shadow 80ms;
+}
+
+.about-card:hover {
+  transform: translate(-2px, -2px);
+  box-shadow: 6px 6px 0 #000;
+  border-color: var(--color-accent);
+}
+
+.about-card__icon {
+  font-size: 1.5rem;
+  line-height: 1;
+  flex-shrink: 0;
+  width: 48px;
+  height: 48px;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  background: var(--color-bg);
+  border: 2px solid var(--color-border);
+  box-shadow: 2px 2px 0 #000;
+}
+
+.about-card__title {
+  font-family: var(--font-pixel);
+  font-size: 0.6rem;
+  color: var(--color-accent);
+  text-shadow: 0 0 6px rgba(0, 245, 255, 0.4);
+  text-transform: uppercase;
+  letter-spacing: 0.06em;
+  margin-bottom: var(--space-2);
+}
+
+.about-card__text {
+  font-family: var(--font-vt);
+  font-size: 1.1rem;
+  color: var(--color-text-muted);
+  line-height: 1.6;
+}
+
+/* Tech tags */
+.about-card__tags {
+  display: flex;
+  flex-wrap: wrap;
+  gap: var(--space-2);
+  margin-top: var(--space-2);
+}
+
+.about-card__tag {
+  padding: 0.25rem 0.6rem;
+  background: transparent;
+  border: 1px solid var(--color-neon-yellow);
+  font-family: var(--font-pixel);
+  font-size: 0.45rem;
+  font-weight: 400;
+  color: var(--color-neon-yellow);
+  text-transform: uppercase;
+  letter-spacing: 0.06em;
+  text-shadow: 0 0 4px rgba(255,221,0,0.3);
+  box-shadow: 1px 1px 0 #000;
+}
+
+/* ---------- Team ---------- */
+.about-team {
+  margin-top: var(--space-4);
+}
+
+.about-team__title {
+  font-family: var(--font-pixel);
+  font-size: 0.65rem;
+  color: var(--color-neon-green);
+  text-shadow: var(--glow-green);
+  text-transform: uppercase;
+  letter-spacing: 0.06em;
+  margin-bottom: var(--space-5);
+}
+
+.about-team__title::before {
+  content: '► ';
+  color: var(--color-neon-yellow);
+}
+
+.about-team__grid {
+  display: grid;
+  grid-template-columns: repeat(2, 1fr);
+  gap: var(--space-3);
+}
+
+.about-team__card {
+  display: flex;
+  align-items: center;
+  gap: var(--space-3);
+  padding: var(--space-3) var(--space-4);
+  background: var(--color-surface);
+  border: 2px solid var(--color-border);
+  box-shadow: 3px 3px 0 #000;
+  transition: transform 80ms, border-color 80ms;
+}
+
+.about-team__card:hover {
+  transform: translate(-2px, -2px);
+  border-color: var(--color-neon-purple);
+}
+
+.about-team__avatar {
+  width: 42px;
+  height: 42px;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  font-size: 1.4rem;
+  background: var(--color-bg);
+  border: 2px solid var(--color-border);
+  box-shadow: 2px 2px 0 #000;
+  flex-shrink: 0;
+}
+
+.about-team__info {
+  display: flex;
+  flex-direction: column;
+  gap: 0.3rem;
+}
+
+.about-team__name {
+  font-family: var(--font-pixel);
+  font-size: 0.55rem;
+  color: var(--color-text);
+  text-transform: uppercase;
+  letter-spacing: 0.04em;
+}
+
+.about-team__role {
+  font-family: var(--font-vt);
+  font-size: 0.95rem;
+  color: var(--color-text-muted);
+}
+
+/* ---------- CTA ---------- */
+.about-page__cta {
+  display: flex;
+  justify-content: flex-start;
+}
+
+/* ---------- Responsive ---------- */
+@media (max-width: 640px) {
+  .about-card {
+    flex-direction: column;
+  }
+  .about-team__grid {
+    grid-template-columns: 1fr;
+  }
+}

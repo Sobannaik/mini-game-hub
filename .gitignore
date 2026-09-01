@@ -1,0 +1,14 @@
+node_modules/
+dist/
+.vite/
+.vscode/
+**/bin/
+**/obj/
+**/.vs/
+**/.DS_Store
+.DS_Store
+Thumbs.db
+npm-debug.log*
+.env
+coverage/
+*.log

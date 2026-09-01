@@ -1,0 +1,61 @@
+/* ============================================================
+   Games Page — 90s Retro Arcade
+   ============================================================ */
+
+.games-page {
+  padding: var(--space-12) 0 var(--space-20);
+}
+
+/* ---------- Header ---------- */
+.games-page__header {
+  margin-bottom: var(--space-10);
+  display: flex;
+  flex-direction: column;
+  gap: var(--space-4);
+}
+
+.games-page__title {
+  font-family: var(--font-pixel);
+  font-size: clamp(0.8rem, 2.5vw, 1.5rem);
+  font-weight: 400;
+  color: var(--color-accent);
+  text-shadow: var(--glow-cyan);
+  text-transform: uppercase;
+  letter-spacing: 0.06em;
+}
+
+/* Pixel arrow prefix */
+.games-page__title::before {
+  content: '► ';
+  color: var(--color-neon-yellow);
+  text-shadow: var(--glow-yellow);
+}
+
+.games-page__subtitle {
+  font-family: var(--font-vt);
+  font-size: 1.25rem;
+  color: var(--color-text-muted);
+}
+
+/* ---------- Grid ---------- */
+.games-page__grid {
+  display: grid;
+  grid-template-columns: repeat(3, 1fr);
+  gap: 1.25rem;
+}
+
+/* ---------- Responsive ---------- */
+@media (max-width: 900px) {
+  .games-page__grid {
+    grid-template-columns: repeat(2, 1fr);
+  }
+}
+
+@media (max-width: 560px) {
+  .games-page {
+    padding: var(--space-8) 0 var(--space-16);
+  }
+  .games-page__grid {
+    grid-template-columns: 1fr;
+  }
+}

@@ -1,0 +1,205 @@
+/* ============================================================
+   GAME BREAK — 90s Retro Arcade Design System
+   ============================================================ */
+
+@import url('https://fonts.googleapis.com/css2?family=Press+Start+2P&family=VT323:wght@400&family=Orbitron:wght@400;700;900&display=swap');
+
+/* ---------- CSS Variables ---------- */
+:root {
+  /* 90s Arcade Colors */
+  --color-bg:           #06060f;
+  --color-bg-soft:      #0d0d1f;
+  --color-surface:      #0f0f24;
+  --color-surface-alt:  #161630;
+  --color-border:       #2a2a5a;
+  --color-border-bright:#00f5ff;
+
+  /* Neon Palette */
+  --color-accent:       #00f5ff;      /* electric cyan */
+  --color-accent-2:     #00c8d4;
+  --color-accent-hover: #00e0ea;
+  --color-accent-glow:  rgba(0, 245, 255, 0.15);
+  --color-neon-yellow:  #ffdd00;
+  --color-neon-pink:    #ff2d9b;
+  --color-neon-green:   #00ff88;
+  --color-neon-purple:  #bf5fff;
+  --color-neon-orange:  #ff8c00;
+
+  --color-highlight:    var(--color-neon-yellow);
+  --color-text:         #e0e8ff;
+  --color-text-muted:   #8890bb;
+  --color-success:      var(--color-neon-green);
+  --color-danger:       #ff3355;
+
+  /* Typography */
+  --font-pixel:   'Press Start 2P', monospace;
+  --font-vt:      'VT323', monospace;
+  --font-orb:     'Orbitron', monospace;
+  --font-sans:    'Press Start 2P', monospace;
+
+  --font-size-xs:   0.55rem;
+  --font-size-sm:   0.65rem;
+  --font-size-base: 0.75rem;
+  --font-size-lg:   0.875rem;
+  --font-size-xl:   1rem;
+  --font-size-2xl:  1.25rem;
+  --font-size-3xl:  1.5rem;
+  --font-size-4xl:  2rem;
+  --font-size-5xl:  2.5rem;
+  --font-size-vt:   1.4rem;
+
+  /* Spacing */
+  --space-1:  0.25rem;
+  --space-2:  0.5rem;
+  --space-3:  0.75rem;
+  --space-4:  1rem;
+  --space-5:  1.25rem;
+  --space-6:  1.5rem;
+  --space-8:  2rem;
+  --space-10: 2.5rem;
+  --space-12: 3rem;
+  --space-16: 4rem;
+  --space-20: 5rem;
+
+  /* Layout */
+  --max-width:     1100px;
+  --navbar-height: 64px;
+
+  /* Borders — pixel/chunky style */
+  --radius-sm:   0px;
+  --radius-md:   0px;
+  --radius-lg:   0px;
+  --radius-xl:   0px;
+  --radius-full: 0px;
+
+  /* 90s Bevel Shadows */
+  --shadow-sm:  2px 2px 0px #000;
+  --shadow-md:  4px 4px 0px #000;
+  --shadow-lg:  6px 6px 0px #000;
+
+  /* Neon glows */
+  --glow-cyan:    0 0 8px #00f5ff, 0 0 20px rgba(0, 245, 255, 0.4);
+  --glow-yellow:  0 0 8px #ffdd00, 0 0 20px rgba(255, 221, 0, 0.4);
+  --glow-pink:    0 0 8px #ff2d9b, 0 0 20px rgba(255, 45, 155, 0.4);
+  --glow-green:   0 0 8px #00ff88, 0 0 20px rgba(0, 255, 136, 0.4);
+
+  /* Transitions */
+  --transition-fast: 80ms steps(2);
+  --transition-base: 120ms steps(3);
+}
+
+/* ---------- Reset ---------- */
+*, *::before, *::after {
+  box-sizing: border-box;
+  margin: 0;
+  padding: 0;
+}
+
+html {
+  scroll-behavior: smooth;
+}
+
+/* CRT Scanline Effect */
+body::before {
+  content: '';
+  position: fixed;
+  inset: 0;
+  background: repeating-linear-gradient(
+    0deg,
+    transparent,
+    transparent 2px,
+    rgba(0, 0, 0, 0.18) 2px,
+    rgba(0, 0, 0, 0.18) 4px
+  );
+  pointer-events: none;
+  z-index: 9999;
+}
+
+/* CRT corner vignette */
+body::after {
+  content: '';
+  position: fixed;
+  inset: 0;
+  background: radial-gradient(ellipse at center, transparent 60%, rgba(0,0,0,0.55) 100%);
+  pointer-events: none;
+  z-index: 9998;
+}
+
+body {
+  font-family: var(--font-pixel);
+  font-size: var(--font-size-base);
+  background-color: var(--color-bg);
+  background-image:
+    radial-gradient(ellipse at 20% 50%, rgba(0, 245, 255, 0.04) 0%, transparent 50%),
+    radial-gradient(ellipse at 80% 20%, rgba(191, 95, 255, 0.04) 0%, transparent 50%);
+  color: var(--color-text);
+  line-height: 1.8;
+  min-height: 100vh;
+  -webkit-font-smoothing: none;
+  image-rendering: pixelated;
+}
+
+#root {
+  min-height: 100vh;
+}
+
+img, svg {
+  display: block;
+  max-width: 100%;
+  image-rendering: pixelated;
+}
+
+a {
+  color: inherit;
+  text-decoration: none;
+}
+
+ul, ol { list-style: none; }
+
+button {
+  font-family: inherit;
+  cursor: pointer;
+  border: none;
+  background: none;
+  image-rendering: pixelated;
+}
+
+h1, h2, h3, h4, h5, h6 {
+  line-height: 1.2;
+  font-weight: 400;
+  font-family: var(--font-pixel);
+}
+
+/* ---------- Utility ---------- */
+.visually-hidden {
+  position: absolute;
+  width: 1px;
+  height: 1px;
+  padding: 0;
+  margin: -1px;
+  overflow: hidden;
+  clip: rect(0,0,0,0);
+  white-space: nowrap;
+  border: 0;
+}
+
+/* ---------- Retro Blink Animation ---------- */
+@keyframes retro-blink {
+  0%, 49% { opacity: 1; }
+  50%, 100% { opacity: 0; }
+}
+
+@keyframes neon-pulse {
+  0%, 100% { text-shadow: var(--glow-cyan); }
+  50% { text-shadow: 0 0 4px #00f5ff; }
+}
+
+@keyframes scanline-sweep {
+  0% { transform: translateY(-100%); }
+  100% { transform: translateY(100vh); }
+}
+
+@keyframes pixel-float {
+  0%, 100% { transform: translateY(0px); }
+  50% { transform: translateY(-6px); }
+}

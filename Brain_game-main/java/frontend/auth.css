@@ -1,0 +1,390 @@
+* {
+    margin: 0;
+    padding: 0;
+    box-sizing: border-box;
+}
+
+body {
+    min-height: 100vh;
+
+    font-family: Arial, Helvetica, sans-serif;
+
+    color: white;
+
+    background:
+        radial-gradient(
+            circle at 15% 20%,
+            rgba(104, 65, 255, 0.25),
+            transparent 30%
+        ),
+        radial-gradient(
+            circle at 85% 80%,
+            rgba(0, 204, 255, 0.18),
+            transparent 30%
+        ),
+        linear-gradient(
+            135deg,
+            #07091f,
+            #0d1033 50%,
+            #080b27
+        );
+
+    display: flex;
+    justify-content: center;
+    align-items: center;
+
+    padding: 25px;
+}
+
+
+/* Main Page */
+
+.page {
+    width: 100%;
+    max-width: 450px;
+}
+
+
+/* Brand */
+
+.brand {
+    text-align: center;
+
+    margin-bottom: 20px;
+}
+
+.brand h1 {
+    font-size: 32px;
+
+    letter-spacing: 5px;
+
+    font-weight: 800;
+
+    background:
+        linear-gradient(
+            90deg,
+            #9b72ff,
+            #6d8cff,
+            #28d9ff
+        );
+
+    -webkit-background-clip: text;
+    -webkit-text-fill-color: transparent;
+}
+
+.brand p {
+    margin-top: 6px;
+
+    color: #8585a9;
+
+    font-size: 13px;
+}
+
+
+/* Card */
+
+.auth-card {
+    width: 100%;
+
+    padding: 35px;
+
+    border-radius: 25px;
+
+    background:
+        linear-gradient(
+            145deg,
+            rgba(31, 29, 87, 0.95),
+            rgba(12, 16, 52, 0.98)
+        );
+
+    border: 1px solid rgba(139, 92, 246, 0.25);
+
+    box-shadow:
+        0 25px 70px rgba(0, 0, 0, 0.45),
+        0 0 40px rgba(91, 75, 220, 0.08);
+}
+
+
+/* Brain Icon */
+
+.icon {
+    width: 60px;
+    height: 60px;
+
+    margin: 0 auto 16px;
+
+    display: flex;
+    justify-content: center;
+    align-items: center;
+
+    border-radius: 17px;
+
+    font-size: 28px;
+
+    background:
+        linear-gradient(
+            135deg,
+            #7446e8,
+            #28aeea
+        );
+
+    box-shadow:
+        0 0 25px rgba(116, 70, 232, 0.4);
+}
+
+
+/* Heading */
+
+.auth-card h2 {
+    text-align: center;
+
+    font-size: 27px;
+
+    margin-bottom: 7px;
+}
+
+.subtitle {
+    text-align: center;
+
+    color: #8888aa;
+
+    font-size: 13px;
+
+    margin-bottom: 25px;
+}
+
+
+/* Tabs */
+
+.tabs {
+    display: grid;
+
+    grid-template-columns: 1fr 1fr;
+
+    gap: 5px;
+
+    padding: 5px;
+
+    margin-bottom: 25px;
+
+    border-radius: 12px;
+
+    background: rgba(7, 10, 35, 0.75);
+}
+
+.tabs button {
+    padding: 11px;
+
+    border: none;
+
+    border-radius: 9px;
+
+    background: transparent;
+
+    color: #77779b;
+
+    font-size: 13px;
+
+    font-weight: bold;
+
+    cursor: pointer;
+}
+
+.tabs button.active {
+    color: white;
+
+    background:
+        linear-gradient(
+            90deg,
+            #7446e8,
+            #4d72ee
+        );
+
+    box-shadow:
+        0 4px 15px rgba(91, 75, 220, 0.35);
+}
+
+
+/* Inputs */
+
+.input-group {
+    margin-bottom: 18px;
+}
+
+.input-group label {
+    display: block;
+
+    color: #cbc8df;
+
+    font-size: 13px;
+
+    font-weight: bold;
+
+    margin-bottom: 8px;
+}
+
+.input-group input {
+    width: 100%;
+
+    padding: 14px;
+
+    border-radius: 11px;
+
+    border: 1px solid rgba(139, 92, 246, 0.22);
+
+    outline: none;
+
+    background: rgba(7, 10, 35, 0.75);
+
+    color: white;
+
+    font-size: 13px;
+
+    transition: 0.2s;
+}
+
+.input-group input::placeholder {
+    color: #626382;
+}
+
+.input-group input:focus {
+    border-color: #8b5cf6;
+
+    box-shadow:
+        0 0 15px rgba(139, 92, 246, 0.2);
+}
+
+
+/* Login Options */
+
+.login-options {
+    display: flex;
+
+    justify-content: space-between;
+
+    align-items: center;
+
+    margin: 5px 0 22px;
+
+    font-size: 11px;
+
+    color: #8585a9;
+}
+
+.login-options label {
+    display: flex;
+
+    align-items: center;
+
+    gap: 6px;
+}
+
+.login-options a {
+    color: #9b72ff;
+
+    text-decoration: none;
+}
+
+
+/* Login Button */
+
+.main-btn {
+    width: 100%;
+
+    padding: 14px;
+
+    border: none;
+
+    border-radius: 11px;
+
+    color: white;
+
+    font-size: 14px;
+
+    font-weight: bold;
+
+    cursor: pointer;
+
+    background:
+        linear-gradient(
+            90deg,
+            #7446e8,
+            #4d72ee
+        );
+
+    box-shadow:
+        0 8px 25px rgba(91, 75, 220, 0.35);
+
+    transition: 0.2s;
+}
+
+.main-btn:hover {
+    transform: translateY(-2px);
+
+    box-shadow:
+        0 10px 30px rgba(91, 75, 220, 0.55);
+}
+
+
+/* Bottom Text */
+
+.bottom-text {
+    text-align: center;
+
+    margin-top: 22px;
+
+    color: #77779b;
+
+    font-size: 12px;
+}
+
+.bottom-text a {
+    color: #9b72ff;
+
+    text-decoration: none;
+
+    font-weight: bold;
+}
+
+.bottom-text a:hover {
+    color: #28d9ff;
+}
+
+
+/* Mobile */
+
+@media (max-width: 500px) {
+
+    body {
+        padding: 15px;
+    }
+
+    .auth-card {
+        padding: 27px 20px;
+    }
+
+    .brand h1 {
+        font-size: 26px;
+    }
+}
+```css
+/* Signup Message */
+
+#message {
+    text-align: center;
+
+    font-size: 12px;
+
+    margin-top: 15px;
+
+    min-height: 16px;
+}
+
+#message.error {
+    color: #ff6b8a;
+}
+
+#message.success {
+    color: #55e6a5;
+}
+```

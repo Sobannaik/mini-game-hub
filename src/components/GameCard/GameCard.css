@@ -1,0 +1,98 @@
+/* ============================================================
+   GameCard — 90s Retro Arcade Style
+   ============================================================ */
+
+.game-card {
+  --card-accent: var(--color-accent);
+
+  position: relative;
+  display: flex;
+  flex-direction: column;
+  gap: var(--space-3);
+  padding: var(--space-5);
+  background: var(--color-surface);
+  border: 2px solid var(--card-accent);
+  /* Pixel-art style double border effect */
+  box-shadow:
+    4px 4px 0 #000,
+    inset 1px 1px 0 rgba(255,255,255,0.06);
+  height: 100%;
+  transition: box-shadow 80ms, transform 80ms;
+  /* Top color accent strip */
+}
+
+.game-card::before {
+  content: '';
+  position: absolute;
+  top: 0; left: 0; right: 0;
+  height: 3px;
+  background: var(--card-accent);
+  box-shadow: 0 0 8px var(--card-accent), 0 0 20px rgba(0,0,0,0.5);
+}
+
+.game-card:hover {
+  transform: translate(-2px, -2px);
+  box-shadow:
+    6px 6px 0 #000,
+    0 0 16px rgba(0, 245, 255, 0.15),
+    inset 1px 1px 0 rgba(255,255,255,0.08);
+  border-color: var(--card-accent);
+}
+
+/* ---------- Icon ---------- */
+.game-card__icon {
+  width: 48px;
+  height: 48px;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  background: var(--color-bg);
+  border: 2px solid var(--card-accent);
+  box-shadow: 2px 2px 0 #000;
+  font-size: 1.6rem;
+  line-height: 1;
+  image-rendering: pixelated;
+}
+
+/* ---------- Body ---------- */
+.game-card__body {
+  flex: 1;
+  display: flex;
+  flex-direction: column;
+  gap: var(--space-2);
+}
+
+.game-card__title {
+  font-family: var(--font-pixel);
+  font-size: 0.6rem;
+  font-weight: 400;
+  color: var(--card-accent);
+  letter-spacing: 0.06em;
+  text-transform: uppercase;
+  text-shadow: 0 0 6px var(--card-accent);
+}
+
+.game-card__desc {
+  font-family: var(--font-vt);
+  font-size: 1.1rem;
+  color: var(--color-text-muted);
+  line-height: 1.4;
+}
+
+/* ---------- Footer (Play button) ---------- */
+.game-card__footer {
+  display: flex;
+  align-items: center;
+  margin-top: var(--space-1);
+}
+
+/* Inherit the card accent for the outline button */
+.game-card .btn--outline {
+  color: var(--card-accent);
+  border-color: var(--card-accent);
+  text-shadow: 0 0 6px var(--card-accent);
+}
+.game-card .btn--outline:hover:not(:disabled) {
+  background: rgba(0,0,0,0.3);
+  box-shadow: 2px 2px 0 #000, 0 0 10px var(--card-accent);
+}

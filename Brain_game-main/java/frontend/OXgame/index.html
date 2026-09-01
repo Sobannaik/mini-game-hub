@@ -1,0 +1,138 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>OX Game</title>
+    <link rel="stylesheet" href="style.css">
+</head>
+
+<body>
+
+    <main class="game-container">
+
+        <!-- Header -->
+        <header class="game-header">
+            <h1>OX GAME</h1>
+            <p id="turnText">Player X's Turn</p>
+        </header>
+
+
+        <!-- Game Area -->
+        <section class="game-area">
+
+            <!-- Board -->
+            <div class="board-card">
+
+                <div class="board" id="board">
+
+                    <button class="cell" data-index="0"></button>
+                    <button class="cell" data-index="1"></button>
+                    <button class="cell" data-index="2"></button>
+
+                    <button class="cell" data-index="3"></button>
+                    <button class="cell" data-index="4"></button>
+                    <button class="cell" data-index="5"></button>
+
+                    <button class="cell" data-index="6"></button>
+                    <button class="cell" data-index="7"></button>
+                    <button class="cell" data-index="8"></button>
+
+                </div>
+
+            </div>
+
+
+            <!-- Right Side -->
+            <aside class="side-panel">
+
+                <!-- Score -->
+                <div class="info-card score-card">
+
+                    <div class="card-title">
+                        <span class="card-icon">🏆</span>
+                        <h2>Game Score</h2>
+                    </div>
+
+                    <div class="score">
+
+                        <div class="score-item x-score">
+                            <span>X</span>
+                            <strong id="xScore">0</strong>
+                            <small>PLAYER X</small>
+                        </div>
+
+                        <div class="score-item o-score">
+                            <span>O</span>
+                            <strong id="oScore">0</strong>
+                            <small>PLAYER O</small>
+                        </div>
+
+                        <div class="score-item draw-score">
+                            <span>—</span>
+                            <strong id="drawScore">0</strong>
+                            <small>DRAWS</small>
+                        </div>
+
+                    </div>
+
+                </div>
+
+
+                <!-- How To Play -->
+                <div class="info-card how-card">
+
+                    <div class="card-title">
+                        <span class="card-icon">💡</span>
+                        <h2>How to Play</h2>
+                    </div>
+
+                    <ul>
+
+                        <li>
+                            <span>01</span>
+                            <p>Take turns placing X and O.</p>
+                        </li>
+
+                        <li>
+                            <span>02</span>
+                            <p>Get three symbols in a row to win.</p>
+                        </li>
+
+                        <li>
+                            <span>03</span>
+                            <p>Complete a row, column or diagonal.</p>
+                        </li>
+
+                    </ul>
+
+                </div>
+
+            </aside>
+
+        </section>
+
+
+        <!-- Buttons -->
+        <div class="buttons">
+
+            <button id="restartBtn" class="restart-btn">
+                <span>↻</span>
+                Restart Game
+            </button>
+
+            <button id="backBtn" class="back-btn">
+                ← Back to Games
+            </button>
+
+        </div>
+
+        <p class="footer-text">Good luck & have fun! ✨</p>
+
+    </main>
+
+
+    <script src="script.js"></script>
+
+</body>
+</html>

@@ -1,0 +1,16 @@
+/* ============================================================
+   Layout Component Styles
+   ============================================================ */
+
+.layout {
+  width: 100%;
+  max-width: var(--max-width);
+  margin-inline: auto;
+  padding-inline: var(--space-6);
+}
+
+@media (max-width: 600px) {
+  .layout {
+    padding-inline: var(--space-4);
+  }
+}
