@@ -1,5 +1,6 @@
-import React, { useState, useEffect } from 'react'
+import React, { useState, useEffect, useRef } from 'react'
 import { useNavigate } from 'react-router-dom'
+import { createGameSession } from '../../utils/gameSession'
 import './TicTacToe.css'
 
 const WINNING_COMBINATIONS = [
@@ -10,6 +11,10 @@ const WINNING_COMBINATIONS = [
 
 export default function TicTacToe() {
   const navigate = useNavigate()
+  const historySession = useRef(null)
+  if (!historySession.current) {
+    historySession.current = createGameSession({ id: 'tic-tac-toe', title: 'Tic-Tac-Toe', icon: '⭕' })
+  }
   
   // Game Modes: 'setup' -> 'playing'
   const [gameMode, setGameMode] = useState('setup')
@@ -21,15 +26,38 @@ export default function TicTacToe() {
   const [gameActive, setGameActive] = useState(false)
   const [winningCells, setWinningCells] = useState([])
   const [statusMessage, setStatusMessage] = useState("Choose your side")
+  const [popupText, setPopupText] = useState('')
+  const [showPopup, setShowPopup] = useState(false)
 
   const [xScore, setXScore] = useState(0)
   const [oScore, setOScore] = useState(0)
   const [drawScore, setDrawScore] = useState(0)
 
+  useEffect(() => () => historySession.current.finish(), [])
+
   // ----------------------------------------------------
   // GAME SETUP
   // ----------------------------------------------------
+  const typePopup = (message) => {
+    setPopupText('')
+    setShowPopup(true)
+
+    let index = 0
+    const interval = setInterval(() => {
+      index += 1
+      setPopupText(message.slice(0, index))
+      if (index >= message.length) {
+        clearInterval(interval)
+        setTimeout(() => {
+          setShowPopup(false)
+          setPopupText('')
+        }, 1200)
+      }
+    }, 24)
+  }
+
   const startGame = (chosenSide) => {
+    historySession.current.start()
     setHumanPlayer(chosenSide)
     const ai = chosenSide === 'X' ? 'O' : 'X'
     setAiPlayer(ai)
@@ -40,6 +68,7 @@ export default function TicTacToe() {
     setWinningCells([])
     setGameMode('playing')
     setStatusMessage("Player X's Turn")
+    typePopup('SYSTEM ONLINE // MATCH START')
   }
 
   // ----------------------------------------------------
@@ -132,6 +161,9 @@ export default function TicTacToe() {
       if (playerSymbol === 'X') setXScore(s => s + 1)
       else setOScore(s => s + 1)
       setGameActive(false)
+      typePopup(`RESULT // PLAYER ${playerSymbol} WINS`)
+      const isHumanWin = playerSymbol === humanPlayer
+      historySession.current.finish({ result: isHumanWin ? 'Win' : 'Loss' })
       return
     }
 
@@ -139,6 +171,8 @@ export default function TicTacToe() {
       setStatusMessage("It's a Draw!")
       setDrawScore(s => s + 1)
       setGameActive(false)
+      typePopup('RESULT // DRAW // NO WINNER')
+      historySession.current.finish({ result: 'Draw' })
       return
     }
 
@@ -177,6 +211,11 @@ export default function TicTacToe() {
         <h1>OX GAME</h1>
         <p>{statusMessage}</p>
       </header>
+
+      <div className={`retro-log ${showPopup ? 'visible' : ''}`}>
+        <span>SYSTEM LOG</span>
+        <strong>{popupText}</strong>
+      </div>
 
       <section className="game-area">
         <div className="board-card" style={{ position: 'relative' }}>

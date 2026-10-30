@@ -27,7 +27,23 @@ function Button({
     .filter(Boolean)
     .join(' ')
 
+  const isExternalLink = typeof to === 'string' && /^(https?:|file:)/i.test(to)
+
   if (to) {
+    if (isExternalLink) {
+      return (
+        <a
+          href={to}
+          className={classes}
+          target="_blank"
+          rel="noreferrer"
+          {...rest}
+        >
+          {children}
+        </a>
+      )
+    }
+
     return (
       <Link to={to} className={classes} {...rest}>
         {children}

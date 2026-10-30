@@ -1,57 +1,48 @@
 /* ============================================================
-   GameCard — 90s Retro Arcade Style
+   GameCard Component — Simple, Clean & Clear Matte Card
    ============================================================ */
 
 .game-card {
   --card-accent: var(--color-accent);
 
-  position: relative;
   display: flex;
   flex-direction: column;
-  gap: var(--space-3);
-  padding: var(--space-5);
-  background: var(--color-surface);
-  border: 2px solid var(--card-accent);
-  /* Pixel-art style double border effect */
-  box-shadow:
-    4px 4px 0 #000,
-    inset 1px 1px 0 rgba(255,255,255,0.06);
+  gap: var(--space-4);
+  padding: var(--space-6);
+  background-color: var(--color-surface);
+  border: 1px solid var(--color-border);
+  border-radius: var(--radius-lg);
   height: 100%;
-  transition: box-shadow 80ms, transform 80ms;
-  /* Top color accent strip */
-}
-
-.game-card::before {
-  content: '';
-  position: absolute;
-  top: 0; left: 0; right: 0;
-  height: 3px;
-  background: var(--card-accent);
-  box-shadow: 0 0 8px var(--card-accent), 0 0 20px rgba(0,0,0,0.5);
+  transition:
+    background-color var(--transition-base),
+    border-color var(--transition-base),
+    transform var(--transition-fast);
 }
 
 .game-card:hover {
-  transform: translate(-2px, -2px);
-  box-shadow:
-    6px 6px 0 #000,
-    0 0 16px rgba(0, 245, 255, 0.15),
-    inset 1px 1px 0 rgba(255,255,255,0.08);
-  border-color: var(--card-accent);
+  transform: translateY(-2px);
+  border-color: var(--color-border-light);
+  background-color: var(--color-surface-hover);
 }
 
 /* ---------- Icon ---------- */
 .game-card__icon {
-  width: 48px;
-  height: 48px;
+  width: 52px;
+  height: 52px;
   display: flex;
   align-items: center;
   justify-content: center;
-  background: var(--color-bg);
-  border: 2px solid var(--card-accent);
-  box-shadow: 2px 2px 0 #000;
+  background-color: var(--color-surface-alt);
+  border: 1px solid var(--color-border);
+  border-radius: var(--radius-md);
   font-size: 1.6rem;
   line-height: 1;
-  image-rendering: pixelated;
+  flex-shrink: 0;
+  transition: border-color var(--transition-fast);
+}
+
+.game-card:hover .game-card__icon {
+  border-color: var(--card-accent);
 }
 
 /* ---------- Body ---------- */
@@ -63,36 +54,39 @@
 }
 
 .game-card__title {
-  font-family: var(--font-pixel);
-  font-size: 0.6rem;
-  font-weight: 400;
-  color: var(--card-accent);
-  letter-spacing: 0.06em;
-  text-transform: uppercase;
-  text-shadow: 0 0 6px var(--card-accent);
+  font-size: 1.15rem;
+  font-weight: 700;
+  color: var(--color-text-bright);
 }
 
 .game-card__desc {
-  font-family: var(--font-vt);
-  font-size: 1.1rem;
+  font-size: 0.9375rem;
   color: var(--color-text-muted);
-  line-height: 1.4;
+  line-height: 1.55;
 }
 
-/* ---------- Footer (Play button) ---------- */
+/* ---------- Footer ---------- */
 .game-card__footer {
   display: flex;
   align-items: center;
-  margin-top: var(--space-1);
+  margin-top: auto;
+  padding-top: var(--space-2);
 }
 
-/* Inherit the card accent for the outline button */
+/* Simple, Solid Matte Play Button */
 .game-card .btn--outline {
-  color: var(--card-accent);
-  border-color: var(--card-accent);
-  text-shadow: 0 0 6px var(--card-accent);
+  width: 100%;
+  justify-content: center;
+  background-color: var(--color-surface-alt);
+  color: var(--color-text-bright);
+  border: 1px solid var(--color-border-light);
+  font-weight: 600;
+  padding: 0.65rem 1.25rem;
+  border-radius: var(--radius-md);
 }
-.game-card .btn--outline:hover:not(:disabled) {
-  background: rgba(0,0,0,0.3);
-  box-shadow: 2px 2px 0 #000, 0 0 10px var(--card-accent);
+
+.game-card:hover .btn--outline {
+  background-color: var(--color-accent);
+  border-color: var(--color-accent);
+  color: #ffffff;
 }

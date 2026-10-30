@@ -1,0 +1,166 @@
+/* ============================================================
+   Memory Match Game — Clean Matte UI
+   ============================================================ */
+
+.memory-match {
+  min-height: calc(100vh - var(--navbar-height));
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  padding: 2rem 1rem 3rem;
+}
+
+.memory-match__panel {
+  width: min(100%, 760px);
+  background: var(--color-surface);
+  border: 1px solid var(--color-border);
+  border-radius: var(--radius-xl);
+  padding: 1.5rem;
+}
+
+.memory-match__header {
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  gap: 1rem;
+  margin-bottom: 1.25rem;
+  flex-wrap: wrap;
+}
+
+.memory-match__title {
+  font-size: clamp(1.6rem, 3vw, 2.2rem);
+  font-weight: 800;
+  color: var(--color-text-bright);
+  margin: 0;
+}
+
+.memory-match__stats {
+  display: flex;
+  gap: 0.75rem;
+  flex-wrap: wrap;
+}
+
+.memory-match__stat {
+  min-width: 90px;
+  padding: 0.5rem 0.8rem;
+  border-radius: var(--radius-md);
+  border: 1px solid var(--color-border);
+  background: var(--color-surface-alt);
+  text-align: center;
+}
+
+.memory-match__stat-label {
+  display: block;
+  font-size: 0.75rem;
+  letter-spacing: 0.05em;
+  text-transform: uppercase;
+  color: var(--color-text-muted);
+  margin-bottom: 0.2rem;
+}
+
+.memory-match__stat-value {
+  font-family: var(--font-sans);
+  color: var(--color-text-bright);
+  font-size: 1.15rem;
+  font-weight: 700;
+}
+
+.memory-match__board {
+  display: grid;
+  grid-template-columns: repeat(4, minmax(0, 1fr));
+  gap: 0.75rem;
+  margin-top: 1rem;
+}
+
+.memory-match__card {
+  aspect-ratio: 1; 
+  border: 1px solid var(--color-border);
+  border-radius: var(--radius-lg);
+  background: var(--color-surface-alt);
+  color: var(--color-text-bright);
+  font-size: clamp(1.5rem, 3vw, 2rem);
+  cursor: pointer;
+  transition: transform 0.15s ease, border-color 0.15s ease, background-color 0.15s ease;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+}
+
+.memory-match__card:hover:not(:disabled) {
+  transform: translateY(-2px);
+  border-color: var(--color-border-light);
+  background-color: var(--color-surface-hover);
+}
+
+.memory-match__card:disabled {
+  cursor: default;
+}
+
+.memory-match__card--flipped,
+.memory-match__card--matched {
+  background-color: var(--color-surface-hover);
+  border-color: var(--color-accent);
+}
+
+.memory-match__controls {
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+  gap: 1rem;
+  margin-top: 1.25rem;
+  flex-wrap: wrap;
+}
+
+.memory-match__status {
+  color: var(--color-text-muted);
+  font-size: 0.9375rem;
+}
+
+.memory-match__actions {
+  display: flex;
+  gap: 0.75rem;
+  flex-wrap: wrap;
+}
+
+.memory-match__button,
+.memory-match__back {
+  border: 1px solid var(--color-border);
+  background: var(--color-surface-alt);
+  color: var(--color-text-bright);
+  border-radius: var(--radius-md);
+  padding: 0.65rem 1.15rem;
+  font-weight: 600;
+  font-size: 0.875rem;
+  cursor: pointer;
+  text-decoration: none;
+  transition: all var(--transition-fast);
+}
+
+.memory-match__button:hover,
+.memory-match__back:hover {
+  background: var(--color-surface-hover);
+  border-color: var(--color-border-light);
+}
+
+.memory-match__button--primary {
+  background: var(--color-accent);
+  border-color: var(--color-accent);
+  color: #ffffff;
+}
+
+.memory-match__button--primary:hover {
+  background: var(--color-accent-hover);
+  border-color: var(--color-accent-hover);
+}
+
+@media (max-width: 640px) {
+  .memory-match__header,
+  .memory-match__controls {
+    flex-direction: column;
+    align-items: flex-start;
+  }
+
+  .memory-match__board {
+    gap: 0.5rem;
+  }
+}

@@ -1,9 +1,14 @@
 import React, { useState, useEffect, useRef } from 'react'
 import { useNavigate } from 'react-router-dom'
+import { createGameSession } from '../../utils/gameSession'
 import './ReactionTime.css'
 
 export default function ReactionTime() {
   const navigate = useNavigate()
+  const historySession = useRef(null)
+  if (!historySession.current) {
+    historySession.current = createGameSession({ id: 'reaction-time', title: 'Reaction Time', icon: '⚡' })
+  }
   
   // Storage state
   const [records, setRecords] = useState({ totalPopped: 0, bestTime: null, bestAverage: null })
@@ -23,6 +28,8 @@ export default function ReactionTime() {
   
   // UI state
   const [showResetConfirm, setShowResetConfirm] = useState(false)
+  const [popupText, setPopupText] = useState('')
+  const [showPopup, setShowPopup] = useState(false)
   
   // Bubble state
   const [bubble, setBubble] = useState(null)
@@ -38,6 +45,8 @@ export default function ReactionTime() {
   const countdownDelayTimerRef = useRef(null)
   const celebrationTimerRef = useRef(null)
   const celebrationSequenceRef = useRef(null)
+
+  useEffect(() => () => historySession.current.finish(), [])
 
   // Load records on mount
   useEffect(() => {
@@ -66,6 +75,8 @@ export default function ReactionTime() {
 
   const startGame = () => {
     if (gameState === 'countdown' || gameState === 'playing') return
+
+    historySession.current.start()
     
     clearAllTimers()
     setBubble(null)
@@ -73,9 +84,12 @@ export default function ReactionTime() {
     reactionTimesRef.current = []
     lifetimeRef.current = 2500
     setCelebration(null)
+    setShowPopup(false)
+    setPopupText('')
     
     setGameState('countdown')
     setCountdown(3)
+    typePopup('SYSTEM ONLINE // POP THE BUBBLES')
     
     let count = 3
     countdownTimerRef.current = setInterval(() => {
@@ -150,6 +164,7 @@ export default function ReactionTime() {
     const times = reactionTimesRef.current
     const average = times.length > 0 ? times.reduce((a, b) => a + b, 0) / times.length : 0
     const best = times.length > 0 ? Math.min(...times) : 0
+    const summary = times.length > 0 ? `REPORT // ${score} POPPED // AVG ${Math.round(average)} MS` : 'REPORT // NO TARGETS HIT'
     
     let newBestTime = false
     let newBestAvg = false
@@ -173,6 +188,12 @@ export default function ReactionTime() {
     setFinalScore(score)
     setFinalAverage(Math.round(average))
     setFinalBest(Math.round(best))
+
+    historySession.current.finish({
+      result: 'Completed',
+      score,
+      details: times.length > 0 ? `Best: ${Math.round(best)}ms • Avg: ${Math.round(average)}ms` : undefined,
+    })
     
     // Celebrations
     if (newBestTime && newBestAvg) {
@@ -185,6 +206,8 @@ export default function ReactionTime() {
     } else if (newBestAvg) {
       showCelebration("✦", "NEW RECORD", "BEST AVERAGE", `${Math.round(average)} ms`)
     }
+
+    typePopup(summary)
   }
 
   const showCelebration = (symbol, title, type, value) => {
@@ -193,6 +216,24 @@ export default function ReactionTime() {
     celebrationTimerRef.current = setTimeout(() => {
       setCelebration(null)
     }, 3300)
+  }
+
+  const typePopup = (message) => {
+    setPopupText('')
+    setShowPopup(true)
+
+    let index = 0
+    const interval = setInterval(() => {
+      index += 1
+      setPopupText(message.slice(0, index))
+      if (index >= message.length) {
+        clearInterval(interval)
+        setTimeout(() => {
+          setShowPopup(false)
+          setPopupText('')
+        }, 1200)
+      }
+    }, 26)
   }
 
   const resetAllData = () => {
@@ -224,6 +265,11 @@ export default function ReactionTime() {
         </div>
         <p>POP THE BUBBLES BEFORE THEY DISAPPEAR</p>
       </header>
+
+      <div className={`retro-log ${showPopup ? 'visible' : ''}`}>
+        <span>SYSTEM LOG</span>
+        <strong>{popupText}</strong>
+      </div>
 
       <section className="stats">
         <div className="stat-card">
@@ -292,15 +338,15 @@ export default function ReactionTime() {
             </div>
             <h2>REACTION REPORT</h2>
             <div className="results">
-              <div className="result-card">
+              <div className="result-card result-card--show">
                 <span>BUBBLES POPPED</span>
                 <strong>{finalScore}</strong>
               </div>
-              <div className="result-card">
+              <div className="result-card result-card--show">
                 <span>AVERAGE REACTION</span>
                 <strong>{finalAverage} ms</strong>
               </div>
-              <div className="result-card">
+              <div className="result-card result-card--show">
                 <span>BEST REACTION</span>
                 <strong>{finalBest} ms</strong>
               </div>

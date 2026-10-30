@@ -4,22 +4,28 @@ import Layout from '../Layout/Layout'
 import './Navbar.css'
 
 const NAV_LINKS = [
-  { to: '/',       label: 'Home'  },
-  { to: '/games',  label: 'Games' },
-  { to: '/about',  label: 'About' },
+  { to: '/',        label: 'Home'    },
+  { to: '/games',   label: 'Games'   },
+  { to: '/history', label: 'History' },
+  { to: '/about',   label: 'About'   },
 ]
 
 function Navbar() {
   const [menuOpen, setMenuOpen] = useState(false)
-
   const closeMenu = () => setMenuOpen(false)
 
   return (
     <header className="navbar">
-      <Layout className="navbar__inner">
+      <div className="navbar__inner">
         {/* Logo */}
         <NavLink to="/" className="navbar__logo" onClick={closeMenu}>
-          <span className="navbar__logo-icon" aria-hidden="true">🎮</span>
+          <img
+            className="navbar__logo-img"
+            src="/logo/proj.jpg"
+            alt="Game Break logo"
+            width="32"
+            height="32"
+          />
           <span className="navbar__logo-text">Game Break</span>
         </NavLink>
 
@@ -50,7 +56,7 @@ function Navbar() {
           <span className="navbar__hamburger-bar" />
           <span className="navbar__hamburger-bar" />
         </button>
-      </Layout>
+      </div>
 
       {/* Mobile drawer */}
       {menuOpen && (

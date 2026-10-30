@@ -1,0 +1,99 @@
+.endless-runner {
+  min-height: calc(100vh - var(--navbar-height));
+  display: flex;
+  flex-direction: column;
+  background: #010008;
+}
+
+.enr-header {
+  display: flex;
+  justify-content: space-between;
+  align-items: flex-start;
+  flex-wrap: wrap;
+  gap: var(--space-4);
+  padding: var(--space-6) var(--space-8);
+  border-bottom: 2px solid #1a004a;
+}
+
+.enr-eyebrow {
+  font-size: var(--font-size-xs);
+  color: var(--color-neon-purple);
+  letter-spacing: 0.15em;
+  margin-bottom: var(--space-2);
+}
+
+.enr-header h1 {
+  font-size: var(--font-size-2xl);
+  color: #bf5fff;
+  text-shadow: 0 0 12px #bf5fff, 0 0 30px rgba(191,95,255,0.4);
+}
+.enr-header p {
+  color: var(--color-text-muted);
+  font-size: var(--font-size-sm);
+  margin-top: var(--space-2);
+}
+
+.enr-stats {
+  display: flex;
+  flex-direction: column;
+  gap: var(--space-2);
+  font-size: var(--font-size-sm);
+  color: var(--color-text-muted);
+  text-align: right;
+}
+.enr-stats strong { color: #bf5fff; }
+
+.enr-scene {
+  flex: 1;
+  position: relative;
+  min-height: 480px;
+  background: #000;
+}
+.enr-scene canvas {
+  display: block;
+  width: 100% !important;
+  height: 100% !important;
+}
+
+.enr-overlay {
+  position: absolute;
+  inset: 0;
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  justify-content: center;
+  gap: var(--space-4);
+  background: rgba(0,0,0,0.86);
+  z-index: 10;
+  text-align: center;
+}
+.enr-overlay span { font-size: 3.5rem; }
+.enr-overlay strong { color: #bf5fff; font-size: var(--font-size-2xl); text-shadow: 0 0 20px #bf5fff; }
+.enr-overlay p { color: var(--color-text-muted); font-size: var(--font-size-sm); max-width: 320px; }
+.enr-dead strong { color: #ff4488; }
+.enr-overlay button {
+  margin-top: var(--space-2);
+  padding: var(--space-3) var(--space-8);
+  background: linear-gradient(135deg, #bf5fff, #00f5ff);
+  color: #000;
+  font-family: var(--font-pixel);
+  font-size: var(--font-size-sm);
+  border: none;
+  cursor: pointer;
+  font-weight: 700;
+  transition: opacity 0.15s, transform 0.1s;
+  box-shadow: 0 0 20px rgba(191,95,255,0.5);
+}
+.enr-overlay button:hover { opacity: 0.85; transform: scale(1.04); }
+
+.enr-footer {
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+  padding: var(--space-4) var(--space-8);
+  border-top: 2px solid #1a004a;
+  font-size: var(--font-size-xs);
+  color: var(--color-text-muted);
+}
+.enr-footer a { color: #bf5fff; }
+.enr-footer a:hover { text-decoration: underline; }

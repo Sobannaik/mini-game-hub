@@ -53,6 +53,22 @@ const GAMES_DATA = [
     to: '/games/image-puzzle',
     accentColor: '#14b8a6',
   },
+  {
+    id: 'memory-match',
+    title: 'Memory Match',
+    description: 'Flip the cards and match every retro icon.',
+    icon: '🧠',
+    to: '/games/memory-match',
+    accentColor: '#f472b6',
+  },
+  {
+    id: 'snake',
+    title: 'Snake',
+    description: 'Classic arcade survival with a neon retro twist.',
+    icon: '🐍',
+    to: '/games/snake',
+    accentColor: '#84cc16',
+  },
 ]
 
 export default GAMES_DATA

@@ -1,9 +1,16 @@
 import React, { useState, useEffect, useRef } from 'react'
 import { useNavigate } from 'react-router-dom'
+import { createGameSession } from '../../utils/gameSession'
 import './RockPaperScissors.css'
 
 export default function RockPaperScissors() {
   const navigate = useNavigate()
+  const historySession = useRef(null)
+  if (!historySession.current) {
+    historySession.current = createGameSession({ id: 'rock-paper-scissors', title: 'Rock Paper Scissors', icon: '✊' })
+  }
+
+  useEffect(() => () => historySession.current.finish(), [])
   
   // Game assets
   const choices = ['R', 'P', 'S']
@@ -20,6 +27,9 @@ export default function RockPaperScissors() {
   const [computerChoice, setComputerChoice] = useState('R')
   const [resultMsg, setResultMsg] = useState('')
   const [resultClass, setResultClass] = useState('')
+  const [resultAnimated, setResultAnimated] = useState(false)
+  const [showPopup, setShowPopup] = useState(false)
+  const [popupText, setPopupText] = useState('')
   
   // Session Stats
   const [sessionStats, setSessionStats] = useState({ wins: 0, draws: 0, losses: 0 })
@@ -49,11 +59,33 @@ export default function RockPaperScissors() {
     }
   }, [allTimeStats])
 
+  const typePopup = (message, closeAfter = 1300) => {
+    setPopupText('')
+    setShowPopup(true)
+
+    let index = 0
+    const interval = setInterval(() => {
+      index += 1
+      setPopupText(message.slice(0, index))
+
+      if (index >= message.length) {
+        clearInterval(interval)
+        window.setTimeout(() => {
+          setShowPopup(false)
+          setPopupText('')
+        }, closeAfter)
+      }
+    }, 24)
+  }
+
   const playGame = (choice) => {
     if (isPlaying) return
+    historySession.current.start()
     setIsPlaying(true)
     setResultMsg('')
     setResultClass('')
+    setResultAnimated(false)
+    setPopupText('')
     
     const finalCompChoice = choices[Math.floor(Math.random() * choices.length)]
     
@@ -78,12 +110,15 @@ export default function RockPaperScissors() {
 
   const showResult = (userC, compC) => {
     setRound(r => r + 1)
+
+    let outcomeMessage = ''
+    let outcomeClass = ''
     
     if (userC === compC) {
       setSessionStats(s => ({ ...s, draws: s.draws + 1 }))
       setAllTimeStats(s => ({ ...s, draws: s.draws + 1 }))
-      setResultMsg("◇ DRAW // SYSTEMS MATCHED")
-      setResultClass("draw")
+      outcomeMessage = '◇ DRAW // SYSTEMS MATCHED'
+      outcomeClass = 'draw'
     } else if (
       (userC === "R" && compC === "S") ||
       (userC === "P" && compC === "R") ||
@@ -91,14 +126,24 @@ export default function RockPaperScissors() {
     ) {
       setSessionStats(s => ({ ...s, wins: s.wins + 1 }))
       setAllTimeStats(s => ({ ...s, wins: s.wins + 1 }))
-      setResultMsg("◆ VICTORY // YOU WIN")
-      setResultClass("win")
+      outcomeMessage = '◆ VICTORY // YOU WIN'
+      outcomeClass = 'win'
     } else {
       setSessionStats(s => ({ ...s, losses: s.losses + 1 }))
       setAllTimeStats(s => ({ ...s, losses: s.losses + 1 }))
-      setResultMsg("◆ DEFEAT // SYSTEM WINS")
-      setResultClass("lose")
+      outcomeMessage = '◆ DEFEAT // SYSTEM WINS'
+      outcomeClass = 'lose'
     }
+
+    setResultMsg(outcomeMessage)
+    setResultClass(outcomeClass)
+    setResultAnimated(false)
+
+    window.requestAnimationFrame(() => {
+      setResultAnimated(true)
+    })
+
+    typePopup(outcomeMessage, 1400)
   }
 
   const resetAllData = () => {
@@ -111,11 +156,26 @@ export default function RockPaperScissors() {
     setShowResetConfirm(false)
   }
 
+  const handleEndSession = () => {
+    if (round > 0) {
+      const totalRounds = sessionStats.wins + sessionStats.draws + sessionStats.losses
+      const dominantResult =
+        sessionStats.wins > sessionStats.losses ? 'Win'
+        : sessionStats.losses > sessionStats.wins ? 'Loss'
+        : 'Draw'
+      historySession.current.finish({
+        result: dominantResult,
+        details: `${totalRounds} rounds • W:${sessionStats.wins} D:${sessionStats.draws} L:${sessionStats.losses}`,
+      })
+    }
+    navigate('/games')
+  }
+
   return (
     <div className="rps-container">
       
       <div className="top-actions">
-        <button className="back-btn" onClick={() => navigate('/games')}>
+        <button className="back-btn" onClick={handleEndSession}>
           ← Back to Games
         </button>
         <button className="reset-data-btn" onClick={() => setShowResetConfirm(true)}>
@@ -171,7 +231,12 @@ export default function RockPaperScissors() {
             </div>
           </div>
 
-          <div className={`result ${resultClass}`}>
+          <div className={`retro-popup ${showPopup ? 'visible' : ''}`}>
+            <span className="popup-label">SYSTEM LOG</span>
+            <strong>{popupText}</strong>
+          </div>
+
+          <div className={`result ${resultClass} ${resultAnimated ? 'show' : ''}`}>
             {resultMsg}
           </div>
 

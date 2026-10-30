@@ -26,39 +26,35 @@
 }
 
 .reset-data-btn, .back-btn {
-    padding: 0.45rem 1rem;
+    padding: 0.55rem 1.15rem;
     background: var(--color-surface);
-    border: 2px solid var(--color-border);
+    border: 1px solid var(--color-border);
     color: var(--color-text);
-    font-family: var(--font-pixel);
-    font-size: 0.48rem;
-    font-weight: 400;
+    font-family: var(--font-sans);
+    font-size: 0.875rem;
+    font-weight: 600;
     cursor: pointer;
-    transition: all 80ms;
-    text-transform: uppercase;
-    letter-spacing: 0.06em;
-    box-shadow: 3px 3px 0 #000;
+    border-radius: var(--radius-md);
+    transition: background-color var(--transition-fast), border-color var(--transition-fast), color var(--transition-fast);
 }
 
 .reset-data-btn {
     color: var(--color-danger);
-    border-color: var(--color-danger);
-    text-shadow: 0 0 6px rgba(255,51,85,0.4);
+    border-color: rgba(239, 68, 68, 0.4);
 }
 .reset-data-btn:hover {
     background: var(--color-danger);
     color: #fff;
-    box-shadow: 3px 3px 0 #000, 0 0 12px rgba(255,51,85,0.4);
+    border-color: var(--color-danger);
 }
 .reset-data-btn:active, .back-btn:active {
-    transform: translate(2px, 2px);
-    box-shadow: 1px 1px 0 #000;
+    transform: translateY(1px);
 }
 
 .back-btn:hover {
-    border-color: var(--color-neon-yellow);
-    color: var(--color-neon-yellow);
-    text-shadow: var(--glow-yellow);
+    background: var(--color-surface-alt);
+    border-color: var(--color-border-light);
+    color: #fff;
 }
 
 /* =========================
@@ -200,6 +196,67 @@
 /* =========================
    RESULT
 ========================= */
+.retro-popup {
+    position: relative;
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    justify-content: center;
+    min-height: 52px;
+    margin: 0.75rem 0 0.5rem;
+    border: 2px solid var(--color-neon-cyan, var(--color-accent));
+    background: rgba(6, 12, 26, 0.95);
+    box-shadow: 0 0 0 2px rgba(0, 245, 255, 0.1), 3px 3px 0 #000;
+    color: var(--color-accent);
+    opacity: 0;
+    transform: translateY(-8px) scale(0.98);
+    transition: all 150ms steps(2);
+    overflow: hidden;
+}
+
+.retro-popup::before {
+    content: '';
+    position: absolute;
+    inset: 0;
+    background: linear-gradient(
+        180deg,
+        rgba(255,255,255,0.08),
+        transparent 18%,
+        transparent 82%,
+        rgba(255,255,255,0.04)
+    );
+}
+
+.retro-popup.visible {
+    opacity: 1;
+    transform: translateY(0) scale(1);
+}
+
+.popup-label {
+    position: relative;
+    z-index: 1;
+    font-family: var(--font-pixel);
+    font-size: 0.38rem;
+    letter-spacing: 0.12em;
+    text-transform: uppercase;
+    color: var(--color-text-muted);
+    margin-top: 0.4rem;
+}
+
+.retro-popup strong {
+    position: relative;
+    z-index: 1;
+    display: inline-block;
+    min-height: 1.2em;
+    padding: 0.25rem 0.75rem 0.45rem;
+    font-family: var(--font-pixel);
+    font-size: 0.52rem;
+    letter-spacing: 0.06em;
+    text-transform: uppercase;
+    color: var(--color-accent);
+    text-shadow: var(--glow-cyan);
+}
+
 .result {
     min-height: 46px;
     display: flex;
@@ -215,6 +272,17 @@
     text-transform: uppercase;
     letter-spacing: 0.06em;
     box-shadow: 3px 3px 0 #000;
+    opacity: 0;
+    transform: translateY(12px) scale(0.98);
+    filter: blur(2px);
+    transition: all 180ms steps(2);
+}
+
+.result.show {
+    opacity: 1;
+    transform: translateY(0) scale(1);
+    filter: blur(0);
+    animation: retro-result-slam 380ms steps(3);
 }
 
 .result.win  {
@@ -230,6 +298,21 @@
     box-shadow: 3px 3px 0 #000, 0 0 10px rgba(255,51,85,0.2);
 }
 .result.draw { color: var(--color-text-muted); }
+
+@keyframes retro-result-slam {
+    0% {
+        transform: translateY(20px) scale(0.86);
+        filter: blur(2px);
+    }
+    55% {
+        transform: translateY(-4px) scale(1.02);
+        filter: blur(0);
+    }
+    100% {
+        transform: translateY(0) scale(1);
+        filter: blur(0);
+    }
+}
 
 /* =========================
    CHOOSER BUTTONS
