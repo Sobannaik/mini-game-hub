@@ -1,5 +1,6 @@
-import { useEffect, useMemo, useState } from 'react'
+import { useEffect, useMemo, useRef, useState } from 'react'
 import { Link } from 'react-router-dom'
+import { createGameSession } from '../../utils/gameSession'
 import './ImagePuzzle.css'
 
 const IMAGE_URL =
@@ -37,6 +38,10 @@ const shuffleBoard = (board) => {
 }
 
 function ImagePuzzle() {
+  const historySession = useRef(null)
+  if (!historySession.current) {
+    historySession.current = createGameSession({ id: 'image-puzzle', title: 'Image Puzzle', icon: '🧩' })
+  }
   const solvedBoard = useMemo(() => createSolvedBoard(), [])
   const [board, setBoard] = useState(() => shuffleBoard(solvedBoard))
   const [moves, setMoves] = useState(0)
@@ -46,6 +51,12 @@ function ImagePuzzle() {
   })
 
   const isSolved = board.every((value, index) => value === solvedBoard[index])
+
+  useEffect(() => () => historySession.current.finish(), [])
+
+  useEffect(() => {
+    if (isSolved && moves > 0) historySession.current.finish({ result: 'Completed', details: `${moves} moves` })
+  }, [isSolved, moves])
 
   useEffect(() => {
     if (!isSolved || moves === 0) return
@@ -69,6 +80,7 @@ function ImagePuzzle() {
     const isAdjacent = Math.abs(row - emptyRow) + Math.abs(col - emptyCol) === 1
     if (!isAdjacent) return
 
+    historySession.current.start()
     const nextBoard = [...board]
     ;[nextBoard[index], nextBoard[emptyIndex]] = [nextBoard[emptyIndex], nextBoard[index]]
     setBoard(nextBoard)
@@ -81,7 +93,9 @@ function ImagePuzzle() {
   }
 
   const showSolved = () => {
+    historySession.current.start()
     setBoard(solvedBoard)
+    historySession.current.finish({ result: 'Completed', details: 'Solution revealed' })
   }
 
   return (

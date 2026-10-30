@@ -1,5 +1,5 @@
 /* ============================================================
-   Navbar — 90s Retro Arcade Style
+   Navbar — Simple, Solid Matte Header
    ============================================================ */
 
 .navbar {
@@ -7,21 +7,19 @@
   top: 0;
   z-index: 100;
   width: 100%;
-  height: var(--navbar-height);
-  background: var(--color-bg);
-  border-bottom: 3px solid var(--color-accent);
-  box-shadow: 0 3px 0 0 rgba(0, 245, 255, 0.3), 0 6px 0 0 rgba(0, 245, 255, 0.1);
+  background-color: var(--color-surface);
+  border-bottom: 1px solid var(--color-border);
 }
 
 .navbar__inner {
-  height: 100%;
+  height: var(--navbar-height);
+  max-width: var(--max-width);
+  margin-inline: auto;
+  padding-inline: var(--space-6);
   display: flex;
   align-items: center;
   justify-content: space-between;
   gap: var(--space-4);
-  padding-inline: var(--space-6);
-  max-width: var(--max-width);
-  margin-inline: auto;
 }
 
 /* ---------- Logo ---------- */
@@ -33,28 +31,24 @@
   flex-shrink: 0;
 }
 
-.navbar__logo-icon {
-  display: inline-flex;
-  width: 2rem;
-  height: 2rem;
-  align-items: center;
-  justify-content: center;
-  font-size: 1.2rem;
-  line-height: 1;
-  border: 2px solid var(--color-accent);
-  box-shadow: var(--glow-cyan), 2px 2px 0 #000;
-  background: var(--color-surface);
-  animation: pixel-float 2s ease-in-out infinite;
+.navbar__logo-img {
+  width: 32px;
+  height: 32px;
+  border-radius: var(--radius-sm);
+  object-fit: cover;
+  flex-shrink: 0;
 }
 
 .navbar__logo-text {
-  font-family: var(--font-pixel);
-  font-size: 0.6rem;
-  font-weight: 400;
+  font-size: var(--font-size-lg);
+  font-weight: 700;
+  color: var(--color-text-bright);
+  letter-spacing: -0.01em;
+  transition: color var(--transition-fast);
+}
+
+.navbar__logo:hover .navbar__logo-text {
   color: var(--color-accent);
-  letter-spacing: 0.1em;
-  text-transform: uppercase;
-  text-shadow: var(--glow-cyan);
 }
 
 /* ---------- Desktop Nav ---------- */
@@ -66,47 +60,47 @@
 
 .navbar__link {
   display: inline-block;
-  padding: 0.4rem 0.75rem;
-  font-family: var(--font-pixel);
-  font-size: 0.55rem;
-  font-weight: 400;
+  padding: 0.45rem 0.95rem;
+  border-radius: var(--radius-sm);
+  font-size: var(--font-size-sm);
+  font-weight: 500;
   color: var(--color-text-muted);
   text-decoration: none;
-  text-transform: uppercase;
-  letter-spacing: 0.08em;
-  border: 2px solid transparent;
-  background: transparent;
-  transition: color 80ms, border-color 80ms, text-shadow 80ms;
+  border: 1px solid transparent;
+  transition: color var(--transition-fast), background-color var(--transition-fast), border-color var(--transition-fast);
 }
 
 .navbar__link:hover {
-  color: var(--color-neon-yellow);
-  border-color: var(--color-neon-yellow);
-  text-shadow: var(--glow-yellow);
-  box-shadow: 0 0 6px rgba(255, 221, 0, 0.2), 2px 2px 0 #000;
+  color: var(--color-text-bright);
+  background-color: var(--color-surface-alt);
 }
 
 .navbar__link--active {
-  color: var(--color-accent);
-  border-color: var(--color-accent);
-  text-shadow: var(--glow-cyan);
-  box-shadow: 0 0 6px rgba(0, 245, 255, 0.2), 2px 2px 0 #000;
+  color: var(--color-text-bright);
+  background-color: var(--color-surface-alt);
+  border-color: var(--color-border-light);
+  font-weight: 600;
 }
 
-/* ---------- Hamburger (mobile) ---------- */
+/* ---------- Hamburger ---------- */
 .navbar__hamburger {
   display: none;
   flex-direction: column;
   justify-content: center;
   gap: 5px;
-  width: 36px;
-  height: 36px;
-  padding: 7px;
-  border: 2px solid var(--color-border);
+  width: 38px;
+  height: 38px;
+  padding: 8px;
+  border-radius: var(--radius-sm);
+  background: var(--color-surface-alt);
+  border: 1px solid var(--color-border);
   cursor: pointer;
   flex-shrink: 0;
-  background: var(--color-surface);
-  box-shadow: 2px 2px 0 #000;
+  transition: border-color var(--transition-fast);
+}
+
+.navbar__hamburger:hover {
+  border-color: var(--color-border-light);
 }
 
 .navbar__hamburger:focus-visible {
@@ -118,8 +112,9 @@
   display: block;
   width: 100%;
   height: 2px;
-  background-color: var(--color-accent);
-  transition: transform 120ms, opacity 120ms;
+  background-color: var(--color-text-muted);
+  border-radius: 2px;
+  transition: transform var(--transition-base), opacity var(--transition-base);
 }
 
 .navbar__hamburger--open .navbar__hamburger-bar:nth-child(1) {
@@ -137,38 +132,36 @@
   display: flex;
   flex-direction: column;
   gap: var(--space-1);
-  padding: var(--space-3) var(--space-6) var(--space-4);
-  background: var(--color-bg);
-  border-bottom: 3px solid var(--color-accent);
+  padding: var(--space-3) var(--space-5) var(--space-4);
+  background-color: var(--color-surface);
+  border-bottom: 1px solid var(--color-border);
 }
 
 .navbar__mobile-link {
   display: block;
   padding: var(--space-3) var(--space-4);
-  font-family: var(--font-pixel);
-  font-size: 0.6rem;
-  font-weight: 400;
+  border-radius: var(--radius-sm);
+  font-size: var(--font-size-base);
+  font-weight: 500;
   color: var(--color-text-muted);
   text-decoration: none;
-  text-transform: uppercase;
-  letter-spacing: 0.08em;
-  border: 2px solid transparent;
-  transition: color 80ms, border-color 80ms;
+  transition: color var(--transition-fast), background-color var(--transition-fast);
 }
 
 .navbar__mobile-link:hover {
-  color: var(--color-neon-yellow);
-  border-color: var(--color-neon-yellow);
+  color: var(--color-text);
+  background-color: var(--color-surface-alt);
 }
 
 .navbar__mobile-link--active {
-  color: var(--color-accent);
-  border-color: var(--color-accent);
-  text-shadow: var(--glow-cyan);
+  color: var(--color-text-bright);
+  background-color: var(--color-surface-alt);
+  font-weight: 600;
 }
 
 /* ---------- Responsive ---------- */
 @media (max-width: 640px) {
-  .navbar__nav { display: none; }
+  .navbar__nav    { display: none; }
   .navbar__hamburger { display: flex; }
+  .navbar__inner { padding-inline: var(--space-4); }
 }

@@ -12,3 +12,4 @@ npm-debug.log*
 .env
 coverage/
 *.log
+archive-games/

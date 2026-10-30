@@ -1,0 +1,167 @@
+/* ============================================================
+   Snake Game — Clean Matte UI
+   ============================================================ */
+
+.snake-game {
+  min-height: calc(100vh - var(--navbar-height));
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  padding: 2rem 1rem 3rem;
+}
+
+.snake-game__panel {
+  width: min(100%, 760px);
+  background: var(--color-surface);
+  border: 1px solid var(--color-border);
+  border-radius: var(--radius-xl);
+  padding: 1.5rem;
+}
+
+.snake-game__header {
+  display: flex;
+  justify-content: space-between;
+  gap: 1rem;
+  align-items: center;
+  margin-bottom: 1.25rem;
+  flex-wrap: wrap;
+}
+
+.snake-game__title {
+  margin: 0;
+  font-size: clamp(1.6rem, 2.8vw, 2.2rem);
+  font-weight: 800;
+  color: var(--color-text-bright);
+}
+
+.snake-game__stats {
+  display: flex;
+  gap: 0.75rem;
+  flex-wrap: wrap;
+}
+
+.snake-game__stat {
+  min-width: 90px;
+  background: var(--color-surface-alt);
+  border: 1px solid var(--color-border);
+  border-radius: var(--radius-md);
+  padding: 0.5rem 0.8rem;
+  text-align: center;
+}
+
+.snake-game__stat-label {
+  display: block;
+  font-size: 0.75rem;
+  letter-spacing: 0.05em;
+  text-transform: uppercase;
+  color: var(--color-text-muted);
+  margin-bottom: 0.2rem;
+}
+
+.snake-game__stat-value {
+  font-family: var(--font-sans);
+  color: var(--color-text-bright);
+  font-size: 1.15rem;
+  font-weight: 700;
+}
+
+.snake-game__board-wrap {
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  padding: 1.25rem;
+  border: 1px solid var(--color-border);
+  border-radius: var(--radius-lg);
+  background: var(--color-bg);
+}
+
+.snake-game__board {
+  width: min(100%, 420px);
+  aspect-ratio: 1;
+  display: grid;
+  grid-template-columns: repeat(10, 1fr);
+  background: var(--color-surface);
+  border: 1px solid var(--color-border);
+  border-radius: var(--radius-md);
+  overflow: hidden;
+}
+
+.snake-game__cell {
+  border: 1px solid rgba(255, 255, 255, 0.03);
+  background: transparent;
+}
+
+.snake-game__cell--snake {
+  background: var(--color-success);
+  border-radius: 2px;
+}
+
+.snake-game__cell--head {
+  background: #34d399;
+  border-radius: 3px;
+}
+
+.snake-game__cell--food {
+  background: var(--color-danger);
+  border-radius: 50%;
+}
+
+.snake-game__controls {
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+  gap: 1rem;
+  margin-top: 1.25rem;
+  flex-wrap: wrap;
+}
+
+.snake-game__message {
+  color: var(--color-text-muted);
+  font-size: 0.9375rem;
+}
+
+.snake-game__actions {
+  display: flex;
+  gap: 0.75rem;
+  flex-wrap: wrap;
+}
+
+.snake-game__button,
+.snake-game__back {
+  border: 1px solid var(--color-border);
+  background: var(--color-surface-alt);
+  color: var(--color-text);
+  border-radius: var(--radius-md);
+  padding: 0.65rem 1.15rem;
+  font-weight: 600;
+  font-size: 0.875rem;
+  cursor: pointer;
+  text-decoration: none;
+  transition: all var(--transition-fast);
+}
+
+.snake-game__button:hover,
+.snake-game__back:hover {
+  background: var(--color-surface-hover);
+  border-color: var(--color-border-light);
+  color: #ffffff;
+}
+
+.snake-game__button--primary {
+  background: var(--color-accent);
+  border-color: var(--color-accent);
+  color: #ffffff;
+}
+
+.snake-game__button--primary:hover {
+  background: var(--color-accent-hover);
+  border-color: var(--color-accent-hover);
+}
+
+@media (max-width: 540px) {
+  .snake-game__header,
+  .snake-game__controls {
+    flex-direction: column;
+    align-items: flex-start;
+  }
+}

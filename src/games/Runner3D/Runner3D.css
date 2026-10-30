@@ -1,0 +1,99 @@
+.runner3d {
+  min-height: calc(100vh - var(--navbar-height));
+  display: flex;
+  flex-direction: column;
+  background: #02010d;
+}
+
+.r3-header {
+  display: flex;
+  justify-content: space-between;
+  align-items: flex-start;
+  flex-wrap: wrap;
+  gap: var(--space-4);
+  padding: var(--space-6) var(--space-8);
+  border-bottom: 2px solid #1a0040;
+}
+
+.r3-eyebrow {
+  font-size: var(--font-size-xs);
+  color: var(--color-neon-pink);
+  letter-spacing: 0.15em;
+  margin-bottom: var(--space-2);
+}
+
+.r3-header h1 {
+  font-size: var(--font-size-2xl);
+  color: #ff2d9b;
+  text-shadow: var(--glow-pink);
+}
+.r3-header p {
+  color: var(--color-text-muted);
+  font-size: var(--font-size-sm);
+  margin-top: var(--space-2);
+}
+
+.r3-stats {
+  display: flex;
+  flex-direction: column;
+  gap: var(--space-2);
+  font-size: var(--font-size-sm);
+  color: var(--color-text-muted);
+  text-align: right;
+}
+.r3-stats strong { color: var(--color-accent); }
+
+.r3-scene {
+  flex: 1;
+  position: relative;
+  min-height: 480px;
+  background: #000;
+  outline: none;
+}
+.r3-scene canvas {
+  display: block;
+  width: 100% !important;
+  height: 100% !important;
+}
+
+.r3-overlay {
+  position: absolute;
+  inset: 0;
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  justify-content: center;
+  gap: var(--space-4);
+  background: rgba(0,0,0,0.86);
+  z-index: 10;
+  text-align: center;
+}
+.r3-overlay span { font-size: 3.5rem; }
+.r3-overlay strong { color: #ff2d9b; font-size: var(--font-size-2xl); text-shadow: var(--glow-pink); }
+.r3-overlay p { color: var(--color-text-muted); font-size: var(--font-size-sm); max-width: 300px; }
+.r3-dead strong { color: #ff4455; }
+.r3-overlay button {
+  margin-top: var(--space-2);
+  padding: var(--space-3) var(--space-8);
+  background: linear-gradient(135deg, #ff2d9b, #bf5fff);
+  color: #fff;
+  font-family: var(--font-pixel);
+  font-size: var(--font-size-sm);
+  border: none;
+  cursor: pointer;
+  transition: opacity 0.15s, transform 0.1s;
+  box-shadow: 0 0 20px rgba(255,45,155,0.5);
+}
+.r3-overlay button:hover { opacity: 0.85; transform: scale(1.04); }
+
+.r3-footer {
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+  padding: var(--space-4) var(--space-8);
+  border-top: 2px solid #1a0040;
+  font-size: var(--font-size-xs);
+  color: var(--color-text-muted);
+}
+.r3-footer a { color: #ff2d9b; }
+.r3-footer a:hover { text-decoration: underline; }

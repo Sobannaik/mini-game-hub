@@ -3,10 +3,10 @@ import Button from '../../components/Button/Button'
 import './About.css'
 
 const TEAM_MEMBERS = [
-  { role: 'Full-stack Lead',     name: 'Team Member 1' },
-  { role: 'Game Developer',      name: 'Team Member 2' },
-  { role: 'Game Developer',      name: 'Team Member 3' },
-  { role: 'UI / Game Developer', name: 'Team Member 4' },
+  { role: 'Lead', name: 'Soban Naik' },
+  { role: 'Game Dev', name: 'Himanshu' },
+  { role: 'Game Dev', name: 'Mudra' },
+  { role: 'Game Dev', name: 'Prachi' },
 ]
 
 function About() {
@@ -23,6 +23,19 @@ function About() {
 
         {/* Main content */}
         <div className="about-page__content">
+          {/* Status note */}
+          <section className="about-card about-card--note">
+            <div className="about-card__icon" aria-hidden="true">⚠️</div>
+            <div>
+              <h2 className="about-card__title">Project Status</h2>
+              <p className="about-card__text">
+                This project is still incomplete and under development. Some games are
+                fully playable, while others are still in progress and may require
+                additional fixes, content, or polishing before being considered complete.
+              </p>
+            </div>
+          </section>
+
           {/* What is it? */}
           <section className="about-card">
             <div className="about-card__icon" aria-hidden="true">🎮</div>
@@ -44,9 +57,8 @@ function About() {
               <h2 className="about-card__title">Why We Built It</h2>
               <p className="about-card__text">
                 Game Break is a Semester 3 college project. The goal was to design
-                and build a complete, polished web application as a team — practising
-                React, component architecture, routing, and collaborative Git workflow
-                in a real project setting.
+                and build a web application as a team — practising React, component
+                architecture, routing, and collaborative workflow in a real project setting.
               </p>
             </div>
           </section>
@@ -57,7 +69,7 @@ function About() {
             <div>
               <h2 className="about-card__title">Tech Stack</h2>
               <ul className="about-card__tags">
-                {['React 18', 'Vite', 'JavaScript', 'CSS (custom properties)', 'React Router v6'].map((tech) => (
+                {['React 18', 'Vite', 'JavaScript', 'CSS', 'React Router'].map((tech) => (
                   <li key={tech} className="about-card__tag">{tech}</li>
                 ))}
               </ul>

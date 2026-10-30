@@ -1,61 +1,530 @@
 /* ============================================================
-   Games Page — 90s Retro Arcade
+   Games Page — Simple, Clear & Matte UI
+   Clean solid surfaces, readable typography, flat matte buttons.
    ============================================================ */
 
 .games-page {
-  padding: var(--space-12) 0 var(--space-20);
+  padding: var(--space-8) 0 var(--space-20);
 }
 
 /* ---------- Header ---------- */
 .games-page__header {
-  margin-bottom: var(--space-10);
+  margin-bottom: var(--space-8);
   display: flex;
   flex-direction: column;
-  gap: var(--space-4);
+  gap: var(--space-3);
+}
+
+.games-page__title-wrap {
+  display: flex;
+  align-items: center;
+  gap: 1rem;
+  flex-wrap: wrap;
 }
 
 .games-page__title {
-  font-family: var(--font-pixel);
-  font-size: clamp(0.8rem, 2.5vw, 1.5rem);
-  font-weight: 400;
-  color: var(--color-accent);
-  text-shadow: var(--glow-cyan);
-  text-transform: uppercase;
-  letter-spacing: 0.06em;
+  font-size: clamp(1.8rem, 4vw, 2.5rem);
+  font-weight: 800;
+  color: var(--color-text-bright);
+  letter-spacing: -0.02em;
 }
 
-/* Pixel arrow prefix */
-.games-page__title::before {
-  content: '► ';
-  color: var(--color-neon-yellow);
-  text-shadow: var(--glow-yellow);
+.games-page__badge-count {
+  font-size: var(--font-size-sm);
+  font-weight: 600;
+  padding: 0.3rem 0.75rem;
+  background: var(--color-surface-alt);
+  border: 1px solid var(--color-border);
+  color: var(--color-accent);
+  border-radius: var(--radius-sm);
 }
 
 .games-page__subtitle {
-  font-family: var(--font-vt);
-  font-size: 1.25rem;
+  font-size: 1.05rem;
   color: var(--color-text-muted);
+  max-width: 750px;
+  line-height: 1.55;
 }
 
-/* ---------- Grid ---------- */
+/* ---------- Category Filter Tabs — Solid Matte Buttons ---------- */
+.games-page__filter-tabs {
+  display: flex;
+  align-items: center;
+  gap: 0.5rem;
+  margin-top: 1rem;
+  flex-wrap: wrap;
+}
+
+.games-page__tab-btn {
+  font-family: var(--font-sans);
+  font-size: 0.9375rem;
+  font-weight: 500;
+  padding: 0.55rem 1.15rem;
+  background-color: var(--color-surface);
+  border: 1px solid var(--color-border);
+  color: var(--color-text-muted);
+  cursor: pointer;
+  transition: all var(--transition-fast);
+  border-radius: var(--radius-sm);
+}
+
+.games-page__tab-btn:hover {
+  background-color: var(--color-surface-alt);
+  color: var(--color-text-bright);
+  border-color: var(--color-border-light);
+}
+
+.games-page__tab-btn--active {
+  background-color: var(--color-accent);
+  border-color: var(--color-accent);
+  color: #ffffff;
+  font-weight: 600;
+}
+
+.games-page__tab-btn--3d.games-page__tab-btn--active {
+  background-color: var(--color-accent);
+  border-color: var(--color-accent);
+  color: #ffffff;
+}
+
+/* ---------- Game Sections ---------- */
+.games-page__section + .games-page__section {
+  margin-top: 4rem;
+}
+
+.games-page__section-header {
+  display: flex;
+  align-items: flex-end;
+  justify-content: space-between;
+  gap: 1.5rem;
+  margin-bottom: 1.75rem;
+  padding-bottom: 0.75rem;
+  border-bottom: 1px solid var(--color-border);
+}
+
+.games-page__section-eyebrow {
+  font-size: var(--font-size-xs);
+  font-weight: 600;
+  color: var(--color-accent);
+  letter-spacing: 0.08em;
+  text-transform: uppercase;
+  margin-bottom: 0.3rem;
+}
+
+.games-page__section-title {
+  font-size: clamp(1.35rem, 2.5vw, 1.75rem);
+  font-weight: 700;
+  color: var(--color-text-bright);
+}
+
+.games-page__section-title--neon {
+  color: var(--color-text-bright);
+}
+
+.games-page__section-description {
+  margin-top: 0.35rem;
+  font-size: 0.9375rem;
+  color: var(--color-text-muted);
+  max-width: 650px;
+  line-height: 1.5;
+}
+
+.games-page__engine-pill {
+  font-size: 0.8125rem;
+  font-weight: 500;
+  padding: 0.3rem 0.65rem;
+  background: var(--color-surface-alt);
+  border: 1px solid var(--color-border);
+  color: var(--color-text-muted);
+  border-radius: var(--radius-sm);
+  white-space: nowrap;
+}
+
+.games-page__section-count {
+  color: var(--color-text-muted);
+  font-size: 0.875rem;
+}
+
+/* ---------- 2D Grid ---------- */
 .games-page__grid {
   display: grid;
   grid-template-columns: repeat(3, 1fr);
   gap: 1.25rem;
 }
 
+/* ============================================================
+   3D Games Grid & Cards
+   ============================================================ */
+.games-page__three-d-grid {
+  display: grid;
+  grid-template-columns: repeat(3, minmax(0, 1fr));
+  gap: 1.25rem;
+}
+
+.games-page__3d-card {
+  display: flex;
+  flex-direction: column;
+  background-color: var(--color-surface);
+  border: 1px solid var(--color-border);
+  border-radius: var(--radius-lg);
+  padding: 1.35rem;
+  transition: border-color var(--transition-fast), background-color var(--transition-fast);
+}
+
+.games-page__3d-card:hover {
+  border-color: var(--color-border-light);
+  background-color: var(--color-surface-hover);
+}
+
+/* Card Top */
+.games-page__3d-card-top {
+  display: flex;
+  align-items: flex-start;
+  gap: 1rem;
+  margin-bottom: 0.85rem;
+}
+
+.games-page__3d-avatar-wrap {
+  width: 52px;
+  height: 52px;
+  flex-shrink: 0;
+  display: grid;
+  place-items: center;
+  background: var(--color-surface-alt);
+  border: 1px solid var(--color-border);
+  border-radius: var(--radius-md);
+}
+
+.games-page__3d-avatar-icon {
+  font-size: 1.8rem;
+  line-height: 1;
+}
+
+.games-page__3d-card-meta {
+  flex: 1;
+  min-width: 0;
+}
+
+.games-page__3d-tags {
+  display: flex;
+  align-items: center;
+  gap: 0.4rem;
+  margin-bottom: 0.25rem;
+  flex-wrap: wrap;
+}
+
+.games-page__tag-engine {
+  font-size: 0.75rem;
+  font-weight: 600;
+  padding: 0.15rem 0.45rem;
+  background: var(--color-surface-alt);
+  border: 1px solid var(--color-border);
+  color: var(--color-accent);
+  border-radius: var(--radius-sm);
+}
+
+.games-page__tag-genre {
+  font-size: 0.8125rem;
+  color: var(--color-text-muted);
+}
+
+.games-page__3d-card-title {
+  font-size: 1.15rem;
+  font-weight: 700;
+  color: var(--color-text-bright);
+  white-space: nowrap;
+  overflow: hidden;
+  text-overflow: ellipsis;
+}
+
+.games-page__3d-card-sub {
+  font-size: 0.875rem;
+  color: var(--color-accent);
+  margin-top: 0.1rem;
+}
+
+/* Card Body */
+.games-page__3d-card-desc {
+  font-size: 0.9375rem;
+  line-height: 1.55;
+  color: var(--color-text-muted);
+  margin-bottom: 1rem;
+  flex: 1;
+}
+
+.games-page__3d-controls-box {
+  background: var(--color-surface-alt);
+  border: 1px solid var(--color-border);
+  border-radius: var(--radius-sm);
+  padding: 0.65rem 0.85rem;
+  margin-bottom: 1rem;
+  font-size: 0.8125rem;
+  color: var(--color-text);
+  line-height: 1.45;
+}
+
+/* Card Action Buttons — Simple Solid Matte */
+.games-page__3d-actions {
+  display: flex;
+  align-items: center;
+  gap: 0.5rem;
+  margin-top: auto;
+  padding-top: 0.85rem;
+  border-top: 1px solid var(--color-border);
+}
+
+.games-page__3d-play-btn {
+  flex: 1.2;
+  display: inline-flex;
+  align-items: center;
+  justify-content: center;
+  gap: 0.4rem;
+  font-family: var(--font-sans);
+  font-size: 0.875rem;
+  font-weight: 600;
+  padding: 0.65rem 1rem;
+  background: var(--color-accent);
+  color: #ffffff;
+  border: 1px solid var(--color-accent);
+  border-radius: var(--radius-md);
+  cursor: pointer;
+  transition: background-color var(--transition-fast), border-color var(--transition-fast);
+}
+
+.games-page__3d-play-btn:hover {
+  background-color: var(--color-accent-hover);
+  border-color: var(--color-accent-hover);
+}
+
+.games-page__3d-info-btn {
+  display: inline-flex;
+  align-items: center;
+  justify-content: center;
+  font-family: var(--font-sans);
+  font-size: 0.8125rem;
+  font-weight: 500;
+  padding: 0.65rem 0.85rem;
+  background: var(--color-surface-alt);
+  border: 1px solid var(--color-border);
+  color: var(--color-text);
+  border-radius: var(--radius-md);
+  cursor: pointer;
+  transition: border-color var(--transition-fast), color var(--transition-fast);
+}
+
+.games-page__3d-info-btn:hover {
+  border-color: var(--color-border-light);
+  color: #ffffff;
+}
+
+.games-page__3d-tab-btn {
+  display: inline-flex;
+  align-items: center;
+  justify-content: center;
+  font-family: var(--font-sans);
+  font-size: 0.8125rem;
+  font-weight: 500;
+  padding: 0.65rem 0.85rem;
+  background: transparent;
+  border: 1px solid var(--color-border);
+  color: var(--color-text-muted);
+  border-radius: var(--radius-md);
+  text-decoration: none;
+  transition: all var(--transition-fast);
+}
+
+.games-page__3d-tab-btn:hover {
+  color: var(--color-text-bright);
+  background: var(--color-surface-alt);
+  border-color: var(--color-border-light);
+}
+
+/* ============================================================
+   Interactive 3D Game Player Modal
+   ============================================================ */
+.games-page__modal-overlay {
+  position: fixed;
+  inset: 0;
+  display: grid;
+  place-items: center;
+  background: rgba(0, 0, 0, 0.75);
+  z-index: 1000;
+  padding: 1.5rem;
+}
+
+.games-page__modal-panel {
+  width: min(1360px, 96vw);
+  height: min(92vh, 920px);
+  display: flex;
+  flex-direction: column;
+  background: var(--color-surface);
+  border: 1px solid var(--color-border-light);
+  border-radius: var(--radius-lg);
+  overflow: hidden;
+}
+
+/* Modal Header */
+.games-page__modal-header {
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  padding: 0.85rem 1.25rem;
+  background: var(--color-surface-alt);
+  border-bottom: 1px solid var(--color-border);
+  flex-shrink: 0;
+}
+
+.games-page__modal-title-group {
+  display: flex;
+  align-items: center;
+  gap: 0.75rem;
+}
+
+.games-page__modal-icon {
+  font-size: 1.6rem;
+}
+
+.games-page__modal-title {
+  font-size: 1.15rem;
+  font-weight: 700;
+  color: var(--color-text-bright);
+}
+
+.games-page__modal-sub {
+  display: flex;
+  align-items: center;
+  gap: 0.5rem;
+  font-size: 0.875rem;
+  color: var(--color-text-muted);
+}
+
+.games-page__modal-badge {
+  color: var(--color-accent);
+  background: var(--color-surface);
+  padding: 0.15rem 0.45rem;
+  border-radius: var(--radius-sm);
+  border: 1px solid var(--color-border);
+}
+
+/* Modal Actions */
+.games-page__modal-actions {
+  display: flex;
+  align-items: center;
+  gap: 0.5rem;
+}
+
+.games-page__modal-tool-btn {
+  font-size: 0.8125rem;
+  font-weight: 500;
+  padding: 0.45rem 0.8rem;
+  background: var(--color-surface);
+  border: 1px solid var(--color-border);
+  color: var(--color-text);
+  border-radius: var(--radius-sm);
+  cursor: pointer;
+  text-decoration: none;
+  display: inline-flex;
+  align-items: center;
+  gap: 0.35rem;
+  transition: all var(--transition-fast);
+}
+
+.games-page__modal-tool-btn:hover {
+  border-color: var(--color-border-light);
+  color: #ffffff;
+}
+
+.games-page__modal-close-btn {
+  width: 32px;
+  height: 32px;
+  display: grid;
+  place-items: center;
+  background: var(--color-surface);
+  border: 1px solid var(--color-border);
+  color: var(--color-text-muted);
+  font-size: 1rem;
+  border-radius: var(--radius-sm);
+  cursor: pointer;
+  transition: all var(--transition-fast);
+}
+
+.games-page__modal-close-btn:hover {
+  background: var(--color-danger);
+  border-color: var(--color-danger);
+  color: #ffffff;
+}
+
+/* Modal Iframe Frame */
+.games-page__frame-container {
+  flex: 1;
+  position: relative;
+  background: #000;
+  overflow: hidden;
+}
+
+.games-page__game-frame {
+  width: 100%;
+  height: 100%;
+  border: none;
+  background: #000;
+  display: block;
+}
+
+/* Modal Footer */
+.games-page__modal-footer {
+  padding: 0.65rem 1.25rem;
+  background: var(--color-surface-alt);
+  border-top: 1px solid var(--color-border);
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  flex-shrink: 0;
+}
+
+.games-page__modal-controls-hint {
+  font-size: 0.8125rem;
+  color: var(--color-text-muted);
+  display: flex;
+  align-items: center;
+  gap: 0.5rem;
+}
+
+.games-page__modal-controls-label {
+  color: var(--color-text);
+  font-weight: 600;
+}
+
 /* ---------- Responsive ---------- */
-@media (max-width: 900px) {
-  .games-page__grid {
+@media (max-width: 1100px) {
+  .games-page__grid,
+  .games-page__three-d-grid {
     grid-template-columns: repeat(2, 1fr);
   }
 }
 
-@media (max-width: 560px) {
+@media (max-width: 680px) {
   .games-page {
-    padding: var(--space-8) 0 var(--space-16);
+    padding: var(--space-6) 0 var(--space-12);
   }
-  .games-page__grid {
+
+  .games-page__grid,
+  .games-page__three-d-grid {
     grid-template-columns: 1fr;
+  }
+
+  .games-page__section-header {
+    align-items: flex-start;
+    flex-direction: column;
+  }
+
+  .games-page__modal-panel {
+    width: 100vw;
+    height: 100vh;
+    border-radius: 0;
+    border: none;
+  }
+
+  .games-page__modal-actions {
+    flex-wrap: wrap;
   }
 }
